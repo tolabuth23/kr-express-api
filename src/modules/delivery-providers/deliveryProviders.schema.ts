@@ -2,11 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Schema({
-  collection: 'delivery-providers',
+  collection: 'deliveryProviders',
   timestamps: true,
   versionKey: false,
 })
-export class delivery_providers {
+export class deliveryProviders {
   @ApiProperty({})
   @Prop({
     type: String,
@@ -31,4 +31,4 @@ export class delivery_providers {
 }
 
 export const deliveryProvidersSchema =
-  SchemaFactory.createForClass(delivery_providers);
+  SchemaFactory.createForClass(deliveryProviders);

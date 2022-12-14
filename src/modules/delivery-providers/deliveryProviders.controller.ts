@@ -3,8 +3,8 @@ import { DeliveryProvidersService } from './deliveryProviders.service';
 import { Request, Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 
-@Controller('delivery-providers')
-@ApiTags('delivery-providers')
+@Controller('deliveryProviders')
+@ApiTags('deliveryProviders')
 export class DeliveryProvidersController {
   constructor(private deliveryProvidersService: DeliveryProvidersService) {}
   @Get()
