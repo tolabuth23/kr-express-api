@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { shortid } from 'shortid'
 import { ApiProperty } from '@nestjs/swagger'
 import { ShipPeriodStatusEnums } from '../enums/shipPeriodStatus.enums'
+import {nanoid} from "nanoid";
 
 @Schema()
 export class ShipPeriod {
@@ -10,7 +10,7 @@ export class ShipPeriod {
     required: true,
     unique: true,
     index: true,
-    default: shortid.generate,
+    default: nanoid,
   })
   objectId: string
 

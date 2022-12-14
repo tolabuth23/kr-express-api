@@ -1,14 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import shortid from 'shortid';
 import { ApiProperty } from '@nestjs/swagger';
 
-const modelName = 'delivery-providers';
-const options = {
-  collection: modelName,
+@Schema({
+  collection: 'delivery-providers',
   timestamps: true,
   versionKey: false,
-};
-@Schema(options)
+})
 export class delivery_providers {
   @ApiProperty({})
   @Prop({

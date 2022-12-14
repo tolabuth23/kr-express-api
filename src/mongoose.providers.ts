@@ -5,11 +5,16 @@ import {
   delivery_providers,
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema';
+import {goods, goodsSchema} from "./modules/goods/goods.schema";
 export const models = [
   {
     name: delivery_providers.name,
     schema: deliveryProvidersSchema,
   },
+  {
+    name: goods.name,
+    schema: goodsSchema
+  }
 ];
 
 export const mongooseModuleAsyncOptions: MongooseModuleAsyncOptions = {
