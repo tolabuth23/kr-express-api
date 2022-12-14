@@ -5,5 +5,5 @@ import {Model} from "mongoose";
 
 @Injectable()
 export class CurrenciesService {
-    @InjectModel(currencies.name) private deliveryProviders: Model<currenciesDocument>
+    @InjectModel(currencies.name) private currenciesModel: Model<currenciesDocument>
 }

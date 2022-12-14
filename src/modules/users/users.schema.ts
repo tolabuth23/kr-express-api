@@ -1,6 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-
-
 import { ACTIVE, USER, USER_LEVEL, USER_STATUS } from '../../constants'
 import * as mongoose from 'mongoose'
 import {nanoid} from "nanoid";

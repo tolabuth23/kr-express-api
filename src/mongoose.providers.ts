@@ -2,18 +2,23 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModuleAsyncOptions } from '@nestjs/mongoose';
 import { DB_CONNECTION_NAME } from './constants';
 import {
-  delivery_providers,
+  deliveryProviders,
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema';
 import {goods, goodsSchema} from "./modules/goods/goods.schema";
+import {currencies, currenciesSchema} from "./modules/currencies/currencies.schema";
 export const models = [
   {
-    name: delivery_providers.name,
+    name: deliveryProviders.name,
     schema: deliveryProvidersSchema,
   },
   {
     name: goods.name,
     schema: goodsSchema
+  },
+  {
+    name:currencies.name,
+    schema: currenciesSchema
   }
 ];
 

@@ -61,11 +61,10 @@ export class goods {
   category: Types.ObjectId;
   @ApiProperty({})
   @Prop({
-    type: String,
     enum: deliveryStatus,
     default: deliveryStatus[0],
   })
-  status: Types.ObjectId;
+  status: deliveryStatus;
   @ApiProperty({})
   @Prop({
     type: Number,
@@ -143,7 +142,7 @@ export class goods {
   weighedAt: Date;
   @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.Mixed,
+    type: SchemaTypes.Mixed,
     default: {},
   })
   meta: any;

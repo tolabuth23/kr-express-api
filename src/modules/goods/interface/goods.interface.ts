@@ -5,6 +5,7 @@ import {SchemaTypes, Types} from "mongoose";
 import {deliveryStatus} from "../../enums/deliveryStatus.enum";
 import {importRateValue} from "../../importRate/importRateValue.schema";
 import {country} from "../../enums/country.enum";
+import {Address} from "../../users/users.schema";
 
 export interface GoodsInterface {
 
@@ -45,16 +46,8 @@ export interface GoodsInterface {
     deliveredAt: Date;
 
     weighedAt: Date;
-
-
     meta: any;
-    // @ApiProperty({})
-    // @Prop({
-    //   type: Address,
-    //   default: null,
-    // })
-    // deliveryAddress: Address;
-    // @ApiProperty({})
+    deliveryAddress: Address;
 
     trackingProvider: Types.ObjectId;
 
