@@ -1,34 +1,34 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
-import AWS from 'aws-sdk';
-import winston from 'winston';
-import WinstonCloudwatch from 'winston-cloudwatch';
-import dayjs from 'dayjs';
+import { ConsoleLogger, Injectable } from '@nestjs/common'
+import AWS from 'aws-sdk'
+import winston from 'winston'
+import WinstonCloudwatch from 'winston-cloudwatch'
+import dayjs from 'dayjs'
 
 const cloudWatchFormatter = (info) => {
   return `${dayjs(info.timestamp).format('YYYY/MM/DD - hh:mm:ss.SSS A')} [${
     info.level
-  }] [${info.context}] ${info.message}`;
-};
+  }] [${info.context}] ${info.message}`
+}
 
 const customFormat = winston.format.combine(
   winston.format.colorize(),
   winston.format.timestamp(),
   winston.format.prettyPrint(),
   winston.format.printf((info) => cloudWatchFormatter(info)),
-);
+)
 
 @Injectable()
 export class LoggerService extends ConsoleLogger {
-  private ctx: string;
-  private winstonLogger: winston.Logger;
+  private ctx: string
+  private winstonLogger: winston.Logger
 
   constructor(ctx = 'Logger') {
-    super(ctx);
-    const isProduction = process.env.NODE_ENV === 'production';
+    super(ctx)
+    const isProduction = process.env.NODE_ENV === 'production'
     AWS.config.update({
       region: process.env.AWS_REGION,
-    });
-    this.setContext(ctx);
+    })
+    this.setContext(ctx)
     this.winstonLogger = winston.createLogger({
       level: 'silly',
       format: customFormat,
@@ -37,7 +37,7 @@ export class LoggerService extends ConsoleLogger {
           silent: isProduction,
         }),
       ],
-    });
+    })
     if (isProduction) {
       this.winstonLogger.add(
         new WinstonCloudwatch({
@@ -48,37 +48,37 @@ export class LoggerService extends ConsoleLogger {
           logGroupName: `${process.env.DOMAIN_NAME}/${process.env.SERVICE_NAME}`,
           logStreamName: this.ctx,
         }),
-      );
+      )
     }
   }
 
   public setContext(context: string): this {
-    this.ctx = context;
-    return this;
+    this.ctx = context
+    return this
   }
 
   public silly(message: string): void {
-    this.winstonLog(message, 'silly');
+    this.winstonLog(message, 'silly')
   }
 
   public debug(message: string): void {
-    this.winstonLog(message, 'debug');
+    this.winstonLog(message, 'debug')
   }
 
   public log(message: string): void {
-    this.winstonLog(message, 'info');
+    this.winstonLog(message, 'info')
   }
 
   public info(message: string): void {
-    this.winstonLog(message, 'info');
+    this.winstonLog(message, 'info')
   }
 
   public warn(message: string): void {
-    this.winstonLog(message, 'warn');
+    this.winstonLog(message, 'warn')
   }
 
   public error(message: string, req = null): void {
-    let msg = message;
+    let msg = message
     if (req) {
       msg = `
         Method: ${req.method}
@@ -88,9 +88,9 @@ export class LoggerService extends ConsoleLogger {
         Param: ${JSON.stringify(req.param)}
         Body: ${JSON.stringify(req.body)}
         Message: ${message}
-      `;
+      `
     }
-    this.winstonLog(msg, 'error');
+    this.winstonLog(msg, 'error')
   }
 
   private winstonLog(
@@ -101,7 +101,7 @@ export class LoggerService extends ConsoleLogger {
       level,
       message,
       context: this.ctx,
-    };
-    this.winstonLogger.log(entry);
+    }
+    this.winstonLogger.log(entry)
   }
 }

@@ -22,11 +22,27 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mongoose": "9.0.1",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.4",
+    "@nestjs/throttler": "^3.1.0",
+    "aws-sdk": "^2.1273.0",
+    "cache-manager": "^5.1.4",
+    "cache-manager-redis-store": "^3.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "dayjs": "^1.11.7",
+    "install": "^0.13.0",
+    "mongoose": "6.0.14",
+    "nestjs-throttler-storage-redis": "^0.1.20",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "shortid": "^2.2.16",
+    "winston": "^3.8.2",
+    "winston-cloudwatch": "^6.1.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

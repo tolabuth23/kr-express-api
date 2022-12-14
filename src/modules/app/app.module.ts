@@ -1,12 +1,16 @@
-import { Module } from '@nestjs/common';
-import { CurrenciesModule } from '../currencies/currencies.module';
-import { DeliveryProvidersModule } from '../delivery-providers/deliveryProviders.module';
-import { GoodsModule } from '../goods/goods.module';
-import { ImportRateValueModule } from '../import-rate-value/import-rate-value.module';
-import { ConfigModule } from '@nestjs/config';
-import configuration from '../../config/configuration';
-import { MongooseModule } from '@nestjs/mongoose';
-import { mongooseModuleAsyncOptions } from '../../mongoose.providers';
+import { Module } from '@nestjs/common'
+import { CurrenciesModule } from '../currencies/currencies.module'
+import { DeliveryProvidersModule } from '../delivery-providers/deliveryProviders.module'
+import { GoodsModule } from '../goods/goods.module'
+import { ImportRateValueModule } from '../import-rate-value/import-rate-value.module'
+import { ConfigModule } from '@nestjs/config'
+import configuration from '../../config/configuration'
+import { MongooseModule } from '@nestjs/mongoose'
+import { mongooseModuleAsyncOptions } from '../../mongoose.providers'
+import { OneTimePasswordModule } from '../one-time-password/one-time-password.module'
+import { SequenceModule } from '../sequences/sequence.module'
+import { ShipPeriodModule } from '../ship-period/ship-period.module'
+import { UsersModule } from '../users/users.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,6 +22,10 @@ import { mongooseModuleAsyncOptions } from '../../mongoose.providers';
     DeliveryProvidersModule,
     GoodsModule,
     ImportRateValueModule,
+    OneTimePasswordModule,
+    SequenceModule,
+    ShipPeriodModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
