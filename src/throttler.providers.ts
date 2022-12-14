@@ -1,8 +1,8 @@
-import { APP_GUARD } from '@nestjs/core'
-import { ConfigModule, ConfigService } from '@nestjs/config'
-import { ThrottlerAsyncOptions } from '@nestjs/throttler'
-import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis'
-import { ThrottlerCustomGuard } from './modules/rate-limit/throttler-custom-guard'
+import { APP_GUARD } from '@nestjs/core';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ThrottlerAsyncOptions } from '@nestjs/throttler';
+import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
+import { ThrottlerCustomGuard } from './modules/rate-limit/throttler-custom-guard';
 
 export const throttlerAsyncOptions: ThrottlerAsyncOptions = {
   imports: [ConfigModule],
@@ -15,9 +15,9 @@ export const throttlerAsyncOptions: ThrottlerAsyncOptions = {
       host: configService.get<string>('redis.host'),
     }),
   }),
-}
+};
 
 export const throttlerServiceProvider = {
   provide: APP_GUARD,
   useClass: ThrottlerCustomGuard,
-}
+};
