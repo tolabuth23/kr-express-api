@@ -1,10 +1,10 @@
+import shortid from 'shortid';
 import { ApiProperty } from '@nestjs/swagger';
 import { deliveryStatus } from '../enums/deliveryStatus.enum';
 import { country } from '../enums/country.enum';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaTypes, Types, Document } from 'mongoose';
-import { importRateValue } from '../importRate/importRateValue.schema';
-import {nanoid} from "nanoid";
+import * as mongoose from 'mongoose';
+import { importRateValue } from '../import-rate-value/import-rate-value.schema';
 
 const modelName = 'goods';
 const options = {
@@ -20,25 +20,25 @@ export class goods {
     required: true,
     index: true,
     unique: true,
-    default: nanoid(),
+    default: shortid.generator,
   })
   objectId: string;
   @ApiProperty({})
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: Schema.prototype.type.objectId,
     ref: 'users',
     index: true,
     default: null,
   })
-  user: Types.ObjectId;
+  user: mongoose.Schema.Types.ObjectId;
   @ApiProperty({})
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: Schema.prototype.type.objectId,
     ref: 'ship-periods',
     index: true,
     default: null,
   })
-  shipPeriod: Types.ObjectId;
+  shipPeriod: mongoose.Schema.Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,
@@ -54,19 +54,19 @@ export class goods {
   qr: string;
   @ApiProperty({})
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: Schema.prototype.type.objectId,
     ref: 'categories',
     index: true,
     default: null,
   })
-  category: Types.ObjectId;
+  category: mongoose.Schema.Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,
     enum: deliveryStatus,
     default: deliveryStatus[0],
   })
-  status: Types.ObjectId;
+  status: mongoose.Schema.Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: Number,
@@ -144,17 +144,24 @@ export class goods {
   weighedAt: Date;
   @ApiProperty({})
   @Prop({
-    type: SchemaTypes.Mixed,
+    type: Schema.prototype.type.Mixed,
     default: {},
   })
-  meta: any;
+  meta: mongoose.Schema.Types.Mixed;
+  // @ApiProperty({})
+  // @Prop({
+  //   type: Address,
+  //   default: null,
+  // })
+  // deliveryAddress: Address;
+  // @ApiProperty({})
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: Schema.prototype.type.ObjectId,
     ref: 'delivery-provider',
     index: true,
     default: null,
   })
-  trackingProvider: Types.ObjectId;
+  trackingProvider: mongoose.Schema.Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,

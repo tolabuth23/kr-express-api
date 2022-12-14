@@ -1,14 +1,9 @@
-import {Inject, Injectable} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose'
+import { Injectable } from '@nestjs/common';
 import { Request, Response } from 'express';
-import {deliveryProviders, deliveryProvidersDocument } from "./deliveryProviders.schema";
-import { Model } from 'mongoose'
 @Injectable()
 export class DeliveryProvidersService {
-  @InjectModel(deliveryProviders.name)
-  private readonly DeliveryProvidersModule: Model<deliveryProvidersDocument>
-    get(){
-      this.DeliveryProvidersModule.find()
-    }
-
+  async getDeliveryProviders(req: Request, res: Response) {
+    const { s = '', page = 1 } = req.query;
+    return;
+  }
 }
