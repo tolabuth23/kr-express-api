@@ -10,6 +10,7 @@ import {
   OneTimePasswordSchema,
 } from './modules/one-time-password/one-time-password.schema'
 import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
+import { User, UserSchema } from './modules/users/users.schema'
 export const models = [
   {
     name: delivery_providers.name,
@@ -22,6 +23,10 @@ export const models = [
   {
     name: Sequence.name,
     schema: SequenceSchema,
+  },
+  {
+    name: User.name,
+    schema: UserSchema,
   },
 ]
 

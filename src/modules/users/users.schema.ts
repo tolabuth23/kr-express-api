@@ -4,7 +4,8 @@ import { shortid } from 'shortid'
 import { ACTIVE, USER, USER_LEVEL, USER_STATUS } from '../../constants'
 import * as mongoose from 'mongoose'
 import { importRateValue } from '../import-rate-value/import-rate-value.schema'
-
+import { HydratedDocument } from 'mongoose'
+export type UserDocument = HydratedDocument<User>
 @Schema()
 export class Address {
   @Prop({
