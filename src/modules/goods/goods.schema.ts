@@ -1,11 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { deliveryStatus } from '../enums/deliveryStatus.enum';
-import { country } from '../enums/country.enum';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaTypes, Types, Document } from 'mongoose';
-import {nanoid} from "nanoid";
-import {importRateValue} from "../importRate/importRateValue.schema";
-import {Address} from "../users/users.schema";
+import { ApiProperty } from '@nestjs/swagger'
+import { deliveryStatus } from '../enums/deliveryStatus.enum'
+import { country } from '../enums/country.enum'
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import mongoose, { SchemaTypes, Types, Document } from 'mongoose'
+import { nanoid } from 'nanoid'
+import { importRateValue } from '../importRate/importRateValue.schema'
+import { Address } from '../users/users.schema'
 
 @Schema({
   collection: 'goods',
@@ -19,9 +19,9 @@ export class goods {
     required: true,
     index: true,
     unique: true,
-    default: nanoid(),
+    default: nanoid,
   })
-  objectId: string;
+  objectId: string
   @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
@@ -29,7 +29,7 @@ export class goods {
     index: true,
     default: null,
   })
-  user: Types.ObjectId;
+  user: Types.ObjectId
   @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
@@ -37,20 +37,20 @@ export class goods {
     index: true,
     default: null,
   })
-  shipPeriod: Types.ObjectId;
+  shipPeriod: Types.ObjectId
   @ApiProperty({})
   @Prop({
     type: String,
     index: true,
     default: null,
   })
-  trackingNumber: string;
+  trackingNumber: string
   @ApiProperty({})
   @Prop({
     type: String,
     required: true,
   })
-  qr: string;
+  qr: string
   @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
@@ -58,127 +58,127 @@ export class goods {
     index: true,
     default: null,
   })
-  category: Types.ObjectId;
+  category: Types.ObjectId
   @ApiProperty({})
   @Prop({
     type: String,
     enum: deliveryStatus,
     default: deliveryStatus[0],
   })
-  status: Types.ObjectId;
+  status: Types.ObjectId
   @ApiProperty({})
   @Prop({
     type: Number,
     default: null,
   })
-  weight: number;
+  weight: number
   @ApiProperty({})
   @Prop({
     type: Number,
     default: 0,
   })
-  cod: number;
+  cod: number
   @ApiProperty({})
   @Prop({
     type: Number,
     required: true,
     default: 0,
   })
-  rate: number;
+  rate: number
   @ApiProperty({})
   @Prop({
     type: Object,
     default: null,
   })
-  currency: object;
+  currency: object
   @ApiProperty({})
   @Prop({
     type: importRateValue,
     default: null,
   })
-  importRate: object;
+  importRate: object
   @ApiProperty({})
   @Prop({
     type: Number,
     default: 0,
   })
-  total: number;
+  total: number
   @ApiProperty({})
   @Prop({
     type: String,
     eum: country,
     default: null,
   })
-  origin: string;
+  origin: string
   @ApiProperty({})
   @Prop({
     type: Date,
     default: null,
   })
-  originArrivedAt: Date;
+  originArrivedAt: Date
   @ApiProperty({})
   @Prop({
     type: String,
     enum: country,
     default: null,
   })
-  destination: string;
+  destination: string
   @ApiProperty({})
   @Prop({
     type: Date,
     default: null,
   })
-  destinationArrivedAt: Date;
+  destinationArrivedAt: Date
   @ApiProperty({})
   @Prop({
     type: Date,
     default: null,
   })
-  deliveredAt: Date;
+  deliveredAt: Date
   @ApiProperty({})
   @Prop({
     type: Date,
     default: null,
   })
-  weighedAt: Date;
+  weighedAt: Date
   @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.Mixed,
+    type: mongoose.Schema.Types.Mixed,
     default: {},
   })
-  meta: any;
+  meta: any
   @ApiProperty({})
   @Prop({
     type: Address,
     default: null,
   })
-  deliveryAddress: Address;
+  deliveryAddress: Address
   @ApiProperty({})
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'delivery-provider',
     index: true,
     default: null,
   })
-  trackingProvider: Types.ObjectId;
+  trackingProvider: Types.ObjectId
   @ApiProperty({})
   @Prop({
     type: String,
     default: null,
   })
-  destinationTrackingNumber: string;
+  destinationTrackingNumber: string
   @ApiProperty({})
   @Prop({
     type: String,
     default: null,
   })
-  deliveryCost: string;
+  deliveryCost: string
 }
 
-export const goodsSchema = SchemaFactory.createForClass(goods);
+export const goodsSchema = SchemaFactory.createForClass(goods)
 
 goodsSchema.statics.countGoodsReceivedByShipPeriod = async function (
   shipPeriod,
 ) {
-  return this.count({ shipPeriod }).lean();
-};
+  return this.count({ shipPeriod }).lean()
+}

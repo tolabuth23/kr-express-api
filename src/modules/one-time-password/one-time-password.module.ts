@@ -7,8 +7,5 @@ import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
   imports: [MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
-  controllers: [OneTimePasswordController],
-  providers: [OneTimePasswordService],
-  exports: [OneTimePasswordService],
 })
 export class OneTimePasswordModule {}
