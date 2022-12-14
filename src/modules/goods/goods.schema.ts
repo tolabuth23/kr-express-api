@@ -148,13 +148,6 @@ export class goods {
     default: {},
   })
   meta: any;
-  // @ApiProperty({})
-  // @Prop({
-  //   type: Address,
-  //   default: null,
-  // })
-  // deliveryAddress: Address;
-  // @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
     ref: 'delivery-provider',

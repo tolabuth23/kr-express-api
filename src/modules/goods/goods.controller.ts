@@ -2,7 +2,6 @@ import { Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import {GoodsService} from "./goods.service";
-
 @Controller('goods')
 @ApiTags('Goods')
 export class GoodsController {

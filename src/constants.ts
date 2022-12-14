@@ -1,10 +1,10 @@
 export const DB_CONNECTION_NAME = 'mongo';
 export const WAITING_TO_RECEIVE = 'waiting-to-receive';
-export const IN_DESTINATION = 'in-destination'; // สินค้าถึงปลายทาง (ไทย)
-export const CREATED = 'created'; // สร้าง
-export const REGISTERED = 'registered'; // ลงทะเบียน
-export const IN_TRANSIT = 'in-transit'; // อยู่ระหว่างการขนส่ง
-export const DELIVERED = 'delivered'; // จัดส่งแล้ว
+export const IN_DESTINATION = 'in-destination';
+export const CREATED = 'created';
+export const REGISTERED = 'registered';
+export const IN_TRANSIT = 'in-transit';
+export const DELIVERED = 'delivered';
 export const SIGN_UP = 'sign-up';
 export const FORGOT_PASSWORD = 'forgot-password';
 export const TH_PHONE_CODE = '+66';
