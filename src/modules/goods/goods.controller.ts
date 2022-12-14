@@ -1,10 +1,13 @@
 import { Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
+import {GoodsService} from "./goods.service";
 
 @Controller('goods')
 @ApiTags('Goods')
 export class GoodsController {
+  constructor(private goodsService : GoodsService) {
+  }
   @Get()
   getListGoods() {
     return;
@@ -18,7 +21,8 @@ export class GoodsController {
     return;
   }
   @Put('/goods/register/:objectId')
-  validateRegister(req: Request, res: Response) {
+  async registerGoods(@Param('objectId') objectId ,req: Request, res: Response) {
+    const s = await this.goodsService.registerGoods(req,res);
     return;
   }
   @Put('/goods/in-destination/:objectId')

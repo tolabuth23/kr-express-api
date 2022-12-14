@@ -2,14 +2,16 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import shortid from 'shortid';
 import { ApiProperty } from '@nestjs/swagger';
 
-const modelName = 'delivery-providers';
-const options = {
-  collection: modelName,
+
+
+export type deliveryProvidersDocument = deliveryProviders & Document
+
+@Schema({
+  collection: deliveryProviders.name,
   timestamps: true,
   versionKey: false,
-};
-@Schema(options)
-export class delivery_providers {
+})
+export class deliveryProviders {
   @ApiProperty({})
   @Prop({
     type: String,
@@ -34,4 +36,4 @@ export class delivery_providers {
 }
 
 export const deliveryProvidersSchema =
-  SchemaFactory.createForClass(delivery_providers);
+  SchemaFactory.createForClass(deliveryProviders);

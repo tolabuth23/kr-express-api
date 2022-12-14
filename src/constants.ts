@@ -37,3 +37,4 @@ export const KILOGRAM = 'kilogram';
 export const PIECE = 'piece';
 export const TH = 'th';
 export const JP = 'jp';
+export const DELIVERY_PROVIDERS_SERVICE = 'delivery-providers-service'
