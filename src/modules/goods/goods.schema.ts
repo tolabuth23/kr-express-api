@@ -1,18 +1,16 @@
-import shortid from 'shortid';
 import { ApiProperty } from '@nestjs/swagger';
 import { deliveryStatus } from '../enums/deliveryStatus.enum';
 import { country } from '../enums/country.enum';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import * as mongoose from 'mongoose';
-import { importRateValue } from '../import-rate-value/import-rate-value.schema';
+import { SchemaTypes, Types, Document } from 'mongoose';
+import {nanoid} from "nanoid";
+import {importRateValue} from "../importRate/importRateValue.schema";
 
-const modelName = 'goods';
-const options = {
-  collection: modelName,
+@Schema({
+  collection: 'goods',
   timestamps: true,
   versionKey: false,
-};
-@Schema(options)
+})
 export class goods {
   @ApiProperty({})
   @Prop({
@@ -20,25 +18,25 @@ export class goods {
     required: true,
     index: true,
     unique: true,
-    default: shortid.generator,
+    default: nanoid(),
   })
   objectId: string;
   @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.objectId,
+    type: SchemaTypes.ObjectId,
     ref: 'users',
     index: true,
     default: null,
   })
-  user: mongoose.Schema.Types.ObjectId;
+  user: Types.ObjectId;
   @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.objectId,
+    type: SchemaTypes.ObjectId,
     ref: 'ship-periods',
     index: true,
     default: null,
   })
-  shipPeriod: mongoose.Schema.Types.ObjectId;
+  shipPeriod: Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,
@@ -54,19 +52,19 @@ export class goods {
   qr: string;
   @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.objectId,
+    type: SchemaTypes.ObjectId,
     ref: 'categories',
     index: true,
     default: null,
   })
-  category: mongoose.Schema.Types.ObjectId;
+  category: Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,
     enum: deliveryStatus,
     default: deliveryStatus[0],
   })
-  status: mongoose.Schema.Types.ObjectId;
+  status: Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: Number,
@@ -147,7 +145,7 @@ export class goods {
     type: Schema.prototype.type.Mixed,
     default: {},
   })
-  meta: mongoose.Schema.Types.Mixed;
+  meta: any;
   // @ApiProperty({})
   // @Prop({
   //   type: Address,
@@ -156,12 +154,12 @@ export class goods {
   // deliveryAddress: Address;
   // @ApiProperty({})
   @Prop({
-    type: Schema.prototype.type.ObjectId,
+    type: SchemaTypes.ObjectId,
     ref: 'delivery-provider',
     index: true,
     default: null,
   })
-  trackingProvider: mongoose.Schema.Types.ObjectId;
+  trackingProvider: Types.ObjectId;
   @ApiProperty({})
   @Prop({
     type: String,
