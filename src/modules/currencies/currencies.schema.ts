@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import shortid from 'shortid';
-import { ApiProperty } from '@nestjs/swagger';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import shortid from 'shortid'
+import { ApiProperty } from '@nestjs/swagger'
 
 @Schema({
   collection: 'currencies',
@@ -18,7 +18,7 @@ export class currencies {
     unique: true,
     default: shortid.generator,
   })
-  objectId: string;
+  objectId: string
 
   @ApiProperty({
     type: String,
@@ -27,7 +27,7 @@ export class currencies {
     type: String,
     required: true,
   })
-  title: string;
+  title: string
 
   @ApiProperty({
     type: String,
@@ -37,7 +37,7 @@ export class currencies {
     required: true,
     unique: true,
   })
-  currencyUnit: string;
+  currencyUnit: string
 
   @ApiProperty({
     type: Number,
@@ -46,7 +46,7 @@ export class currencies {
     type: Number,
     required: true,
   })
-  value: number;
+  value: number
 }
 
-export const currenciesSchema = SchemaFactory.createForClass(currencies);
+export const currenciesSchema = SchemaFactory.createForClass(currencies)
