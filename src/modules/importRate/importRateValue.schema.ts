@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import shortid from 'shortid'
 import { ApiProperty } from '@nestjs/swagger'
 
 const modelName = 'import-rates'

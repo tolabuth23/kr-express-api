@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 
-import { shortid } from 'shortid'
+
 import { ACTIVE, USER, USER_LEVEL, USER_STATUS } from '../../constants'
 import * as mongoose from 'mongoose'
-import { importRateValue } from '../import-rate-value/import-rate-value.schema'
+import {nanoid} from "nanoid";
+import {importRateValue} from "../importRate/importRateValue.schema";
 
 @Schema()
 export class Address {
@@ -97,7 +98,7 @@ export class User {
     required: true,
     unique: true,
     index: true,
-    default: shortid.generate,
+    default: nanoid,
   })
   objectId: string
 
