@@ -52,14 +52,14 @@ export class CreateUserDto {
   @IsString()
   objectId: string
   @ApiProperty({
-    example: '0934532',
+    example: '0931516482',
   })
   @IsNotEmpty()
   @IsString()
   phoneNumber: string
 
   @ApiProperty({
-    example: '233434',
+    example: '1111',
   })
   @IsNotEmpty()
   @IsString()
@@ -71,27 +71,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   latestLogin: Date
-
-  @ApiProperty({
-    example: 'active',
-  })
-  @IsNotEmpty()
-  @IsString()
-  status: string
-
-  @ApiProperty({
-    example: ['user'],
-  })
-  @IsNotEmpty()
-  roles: string[]
-
-  @ApiProperty({
-    example: 'user',
-  })
-  @IsNotEmpty()
-  @IsString()
-  level: string
-
   @ApiProperty({})
   primaryGoodsType?: string
 
