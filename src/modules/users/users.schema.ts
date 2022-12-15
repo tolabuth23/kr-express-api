@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { Document, SchemaType, SchemaTypes } from 'mongoose'
-import { nanoid } from 'nanoid'
+import { Document, SchemaType, SchemaTypes, Types } from 'mongoose'
+import * as shortid from 'shortid'
 import {
   ACTIVE,
   USER,
@@ -11,6 +11,8 @@ import {
 } from '../../constants'
 import mongoose from 'mongoose'
 import { importRateValue } from '../importRate/importRateValue.schema'
+import { ERole } from './enum/enum-role'
+import { UserStatus } from './enum/enum-status'
 
 export type UserDocument = User & Document
 
@@ -121,7 +123,7 @@ export class User {
     required: true,
     unique: true,
     index: true,
-    default: nanoid,
+    default: shortid.generated,
   })
   objectId: string
 
@@ -137,6 +139,7 @@ export class User {
   @Prop({
     type: String,
     required: true,
+    index: true,
   })
   password: string
 
@@ -148,15 +151,15 @@ export class User {
 
   @Prop({
     type: String,
-    enum: USER_STATUS,
-    default: ACTIVE,
+    enum: UserStatus,
+    default: UserStatus.ACTIVE,
   })
   status: string
 
   @Prop({
     type: [String],
-    enum: USER_ROLES,
-    default: [USER],
+    enum: ERole,
+    default: [ERole.User],
   })
   roles: string[]
 
@@ -175,11 +178,11 @@ export class User {
 
   @Prop({
     type: SchemaTypes.ObjectId,
-    ref: 'import-rates',
+    ref: importRateValue.name,
     index: true,
     default: null,
   })
-  primaryGoodsType: importRateValue
+  primaryGoodsType: Types.ObjectId
 
   @Prop({
     type: Provider,

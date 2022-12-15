@@ -1,34 +1,42 @@
-import { Injectable } from '@nestjs/common'
+import {
+  CACHE_MANAGER,
+  ForbiddenException,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import { Cache } from 'cache-manager'
 import { bcrypt } from 'bcrypt'
-import { CreateUserDto } from '../users/dto/create-user.dto'
-import { User } from '../users/users.schema'
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userService.findOne(username)
-    const isMatch = await bcrypt.compare(pass, user.password)
-    console.log('Check password: ', isMatch)
-    if (user && isMatch) {
+  async validateUser(phoneNumber: string, pass: string): Promise<any> {
+    const user = await this.userService.findOne(phoneNumber)
+    if (user && user.password === pass) {
       const { password, ...result } = user
       return result
     }
     return null
   }
+
   async login(user: any) {
-    const payload = { username: user.username, sub: user._id }
+    const payload = { username: user.username, sub: user.userId }
+    return this.createTokens(payload)
+  }
+
+  async createTokens(payload) {
     return {
-      access_token: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload),
+      refreshToken: this.jwtService.sign(payload, {
+        expiresIn: '60d',
+      }),
+      changedPassword: 'false',
     }
   }
-  // async create(user: CreateUserDto): Promise<User> {
-  //   return this.userService.createUser(user)
-  // }
 }

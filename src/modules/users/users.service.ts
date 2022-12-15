@@ -9,10 +9,13 @@ export class UsersService {
   constructor(
     @InjectModel(User.name) private usersModel: Model<UserDocument>,
   ) {}
-  async createUser(user: CreateUserDto): Promise<UserDocument> {
-    return this.usersModel.create(user)
+  async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
+    return this.usersModel.create(createUserDto)
   }
-  async findById(objectId: string): Promise<User | undefined> {
-    return this.usersModel.findOne({ objectId }).lean()
+  async findById(id: string): Promise<User> {
+    return this.usersModel.findOne({ _id: id }).lean()
+  }
+  async findOne(phoneNumber: string): Promise<User | undefined> {
+    return this.usersModel.findOne({ phoneNumber })
   }
 }
