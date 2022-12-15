@@ -4,6 +4,8 @@ import { JwtService } from '@nestjs/jwt'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { bcrypt } from 'bcrypt'
+import { CreateUserDto } from '../users/dto/create-user.dto'
+import { User } from '../users/users.schema'
 @Injectable()
 export class AuthService {
   constructor(
@@ -26,4 +28,7 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     }
   }
+  // async create(user: CreateUserDto): Promise<User> {
+  //   return this.userService.createUser(user)
+  // }
 }

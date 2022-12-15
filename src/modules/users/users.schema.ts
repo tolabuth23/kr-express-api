@@ -1,10 +1,22 @@
+import { ApiProperty } from '@nestjs/swagger'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { ACTIVE, USER, USER_LEVEL, USER_STATUS } from '../../constants'
-import * as mongoose from 'mongoose'
+import { Document, SchemaType, SchemaTypes } from 'mongoose'
 import { nanoid } from 'nanoid'
+import {
+  ACTIVE,
+  USER,
+  USER_LEVEL,
+  USER_ROLES,
+  USER_STATUS,
+} from '../../constants'
+import mongoose from 'mongoose'
 import { importRateValue } from '../importRate/importRateValue.schema'
 
-@Schema()
+export type UserDocument = User & Document
+
+@Schema({
+  _id: false,
+})
 export class Address {
   @Prop({
     type: String,
@@ -61,21 +73,34 @@ export class Address {
   isDefault: boolean
 }
 
-export class Socieal {
+export const AddressSchema = SchemaFactory.createForClass(Address)
+@Schema({
+  _id: false,
+})
+export class Social {
   @Prop({
     type: String,
   })
   id: string
 }
-
+export const SocialSchema = SchemaFactory.createForClass(Social)
+@Schema({
+  _id: false,
+})
 export class Provider {
-  @Prop({ type: Socieal })
-  line: Socieal
+  @Prop({ type: Social })
+  line: Social
 }
-
+export const ProviderSchema = SchemaFactory.createForClass(Provider)
+@Schema({
+  collection: 'users',
+  timestamps: true,
+  versionKey: false,
+})
 export class User {
   @Prop({
     type: String,
+    //unique: true,
   })
   email: string
 
@@ -86,10 +111,10 @@ export class User {
   displayName: string
 
   @Prop({
-    type: [Address],
+    type: [],
     required: true,
   })
-  address: Address
+  addresses: Address[]
 
   @Prop({
     type: String,
@@ -126,7 +151,14 @@ export class User {
     enum: USER_STATUS,
     default: ACTIVE,
   })
-  static: string
+  status: string
+
+  @Prop({
+    type: [String],
+    enum: USER_ROLES,
+    default: [USER],
+  })
+  roles: string[]
 
   @Prop({
     type: String,
@@ -142,7 +174,7 @@ export class User {
   token: string
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
+    type: SchemaTypes.ObjectId,
     ref: 'import-rates',
     index: true,
     default: null,
@@ -161,4 +193,5 @@ export class User {
   })
   changedPassword: boolean
 }
+
 export const UserSchema = SchemaFactory.createForClass(User)
