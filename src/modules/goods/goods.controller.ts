@@ -1,8 +1,11 @@
 import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ApiTags } from '@nestjs/swagger';
+import {ApiBody, ApiParam, ApiTags} from '@nestjs/swagger';
 import {GoodsService} from "./goods.service";
-import {GoodsDto} from "./dto/goods.dto";
+import {RegisterGoodsDTO} from "./dto/registerGoods.dto";
+import {CreateGoodsDTO} from "./dto/createGoods.dto";
+import {InDestinationGoodsDTO} from "./dto/inDestinationGoods.dto";
+
 
 @Controller('goods')
 @ApiTags('Goods')
@@ -13,24 +16,48 @@ export class GoodsController {
   getListGoods() {
     return ;
   }
+  @ApiBody({
+    type: CreateGoodsDTO
+  })
   @Post()
-  async createGoods(@Body() goodsDto : GoodsDto,req: Request, res: Response,) {
-    console.log(goodsDto);
-    return await this.goodsService.goodsCreate(req,res,goodsDto);
+  async createGoods(@Body() createGoods : CreateGoodsDTO,req: Request, res: Response,) {
+    return await this.goodsService.goodsCreate(req,res,createGoods);
   }
-  @Get('/goods/:objectId')
-  getGoodByObjectId(req: Request, res: Response, @Param('objectId') objectId) {
+
+  @ApiParam({
+    name: 'ObjectId',
+    type: String
+  })
+  @Get(':objectId')
+  getGoodByObjectId(req: Request, res: Response, @Param('objectId') objectId: string) {
+    return "arisak";
+  }
+  @ApiParam({
+    name: 'ObjectId',
+    type: String
+  })
+  @ApiBody({
+    type: RegisterGoodsDTO,
+  })
+  validateRegister(req: Request, res: Response,@Body() registerGoodsDTO :RegisterGoodsDTO) {
     return;
   }
-  @Put('/goods/register/:objectId')
-  validateRegister(req: Request, res: Response) {
+  @ApiParam({
+    name: 'ObjectId',
+    type: String
+  })
+  @ApiBody({
+    type: InDestinationGoodsDTO,
+  })
+  @Put('/in-destination/:objectId')
+  validateInDestination(req: Request, res: Response,@Body() inDestinationGoodsDTO :InDestinationGoodsDTO) {
     return;
   }
-  @Put('/goods/in-destination/:objectId')
-  validateInDestination(req: Request, res: Response) {
-    return;
-  }
-  @Put('/goods/delivered/:objectId')
+  @ApiParam({
+    name: 'ObjectId',
+    type: String
+  })
+  @Put('/delivered/:objectId')
   validateDeliveredGoods(req: Request, res: Response) {
     return;
   }

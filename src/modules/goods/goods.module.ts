@@ -7,5 +7,7 @@ import { DB_CONNECTION_NAME } from '../../constants'
 
 @Module({
   imports: [MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
+  controllers: [GoodsController],
+  providers: [GoodsService]
 })
 export class GoodsModule {}

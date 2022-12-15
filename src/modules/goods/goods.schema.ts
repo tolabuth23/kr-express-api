@@ -5,8 +5,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { SchemaTypes, Types, Document } from 'mongoose';
 import {nanoid} from "nanoid";
 import {importRateValue} from "../importRate/importRateValue.schema";
-import {Address} from "../users/users.schema";
-
+import {Address, User} from "../users/users.schema";
+import * as shortid from 'shortid'
+import {currencies} from "../currencies/currencies.schema";
 @Schema({
   collection: 'goods',
   timestamps: true,
@@ -19,17 +20,16 @@ export class goods {
     required: true,
     index: true,
     unique: true,
-    default: nanoid(),
+    default: shortid.generate(),
   })
   objectId: string;
   @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
-    ref: 'users',
     index: true,
     default: null,
   })
-  user: Types.ObjectId;
+  user: User;
   @ApiProperty({})
   @Prop({
     type: SchemaTypes.ObjectId,
@@ -102,10 +102,12 @@ export class goods {
     default: 0,
   })
   total: number;
-  @ApiProperty({})
+  @ApiProperty({
+
+  })
   @Prop({
     type: String,
-    eum: country,
+    eum: [null,country.JP],
     default: null,
   })
   origin: string;
@@ -118,10 +120,10 @@ export class goods {
   @ApiProperty({})
   @Prop({
     type: String,
-    enum: country,
+    enum: [null,country.TH],
     default: null,
   })
-  destination: string;
+  destination?: string;
   @ApiProperty({})
   @Prop({
     type: Date,
@@ -173,11 +175,6 @@ export class goods {
   })
   deliveryCost: string;
 }
-
+export type goodsDocument = goods & Document
 export const goodsSchema = SchemaFactory.createForClass(goods);
 
-goodsSchema.statics.countGoodsReceivedByShipPeriod = async function (
-  shipPeriod,
-) {
-  return this.count({ shipPeriod }).lean();
-};
