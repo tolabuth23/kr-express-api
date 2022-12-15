@@ -1,14 +1,15 @@
 import {Types} from "mongoose";
 import {Address, User} from "../../users/users.schema";
 import {ApiProperty} from "@nestjs/swagger";
-import {IsDefined, IsEnum, IsMongoId, IsNumber, IsOptional, IsString} from "class-validator";
+import {IsDate, IsDefined, IsEnum, IsMongoId, IsNumber, IsObject, IsOptional, IsString} from "class-validator";
 import {Prop} from "@nestjs/mongoose";
 import {ShipPeriod} from "../../ship-period/ship-period.schema";
 import {deliveryStatus} from "../../enums/deliveryStatus.enum";
 import {currencies} from "../../currencies/currencies.schema";
 import {importRateValue} from "../../importRate/importRateValue.schema";
+import {country} from "../../enums/country.enum";
 
-export class GoodsDto{
+export class GoodsDTO {
     @ApiProperty({
 
     })
@@ -74,69 +75,81 @@ export class GoodsDto{
 
     })
     @IsString()
+    @IsOptional()
     @Prop({type: Types.ObjectId, ref: currencies})
     currency?: object;
     @ApiProperty({
 
     })
-    @IsString()
+    @IsOptional()
     @Prop({type: Types.ObjectId, ref: importRateValue})
     importRate?: importRateValue;
     @ApiProperty({
 
     })
     @IsNumber()
+    @IsOptional()
     total?: number;
     @ApiProperty({
-
+        enum:[null,country.JP]
     })
-
-    origin: string;
+    @IsEnum([null,country.JP])
+    @IsOptional()
+    origin?: string;
+    @IsOptional()
     @ApiProperty({
 
     })
-
-    originArrivedAt: Date;
+    originArrivedAt?: Date;
+    @IsEnum([null,country.TH])
+    @IsOptional()
+    @ApiProperty({
+        enum:[null,country.TH]
+    })
+    destination?: string;
+    @IsOptional()
     @ApiProperty({
 
     })
-
-    destination: string;
+    destinationArrivedAt?: Date;
+    @IsOptional()
     @ApiProperty({
 
     })
-
-    destinationArrivedAt: Date;
-    @ApiProperty({
-
-    })
-
     deliveredAt: Date;
+    @IsOptional()
     @ApiProperty({
 
     })
-
     weighedAt: Date;
+    @IsObject()
+    @IsOptional()
     @ApiProperty({
 
     })
-    meta: any;
+    meta?: any;
+    @IsObject()
+    @IsOptional()
     @ApiProperty({
 
     })
-    deliveryAddress: Address;
+    deliveryAddress?: Address;
+    @IsObject()
+    @IsOptional()
     @ApiProperty({
 
     })
-
     trackingProvider: Types.ObjectId;
+    @IsString()
+    @IsOptional()
     @ApiProperty({
-
+        example: "11232314123"
     })
-
     destinationTrackingNumber: string;
+    @IsDefined()
+    @IsNumber()
     @ApiProperty({
 
     })
-    deliveryCost: string;
+    deliveryCost: number;
 }
