@@ -3,7 +3,7 @@ import {Prop, Schema} from "@nestjs/mongoose";
 import {nanoid} from "nanoid";
 import {SchemaTypes, Types} from "mongoose";
 import {deliveryStatus} from "../../enums/deliveryStatus.enum";
-import {importRateValue} from "../../importRate/importRateValue.schema";
+import {ImportRateValue} from "../../importRate/schemas/importRateValue.schema";
 import {country} from "../../enums/country.enum";
 import {Address} from "../../users/users.schema";
 

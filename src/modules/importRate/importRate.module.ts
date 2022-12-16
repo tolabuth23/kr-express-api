@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common'
-import { SequenceService } from './sequence.service'
+import { ImportRateController } from './importRate.controller'
+import { ImportRateService } from './importRate.service'
 import { MongooseModule } from '@nestjs/mongoose'
 import { models } from '../../mongoose.providers'
 import { DB_CONNECTION_NAME } from '../../constants'
 
 @Module({
   imports: [MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
-  providers: [SequenceService],
+  controllers: [ImportRateController],
+  providers: [ImportRateService],
+  exports: [ImportRateService],
 })
-export class SequenceModule {}
+export class ImportRateModule {}

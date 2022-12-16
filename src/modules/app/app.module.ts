@@ -8,6 +8,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { mongooseModuleAsyncOptions } from '../../mongoose.providers'
 import { OneTimePasswordModule } from '../one-time-password/one-time-password.module'
 import { AuthModule } from '../authentication/auth.module'
+import { ImportRateModule } from '../importRate/importRate.module'
+import { ShipPeriodModule } from '../ship-period/ship-period.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +22,8 @@ import { AuthModule } from '../authentication/auth.module'
     GoodsModule,
     OneTimePasswordModule,
     AuthModule,
+    ImportRateModule,
+    ShipPeriodModule,
   ],
   controllers: [],
   providers: [],

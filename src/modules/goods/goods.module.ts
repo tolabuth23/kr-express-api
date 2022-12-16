@@ -4,9 +4,11 @@ import { GoodsService } from './goods.service'
 import { MongooseModule } from '@nestjs/mongoose'
 import { models } from '../../mongoose.providers'
 import { DB_CONNECTION_NAME } from '../../constants'
+import {UsersService} from "../users/users.service";
+import {UsersModule} from "../users/users.module";
 
 @Module({
-  imports: [MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
+  imports: [UsersModule,MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
   controllers: [GoodsController],
   providers: [GoodsService]
 })
