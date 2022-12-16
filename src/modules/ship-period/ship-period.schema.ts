@@ -2,8 +2,15 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { ApiProperty } from '@nestjs/swagger'
 import { ShipPeriodStatusEnums } from '../enums/shipPeriodStatus.enums'
 import {nanoid} from "nanoid";
+import {Document} from "mongoose";
+import {ImportRate} from "../importRate/schemas/importRate.schema";
 
-@Schema()
+export type shipPeriodDocument = ShipPeriod & Document
+@Schema({
+  collection: 'ship-periods',
+  timestamps: true,
+  versionKey: false,
+})
 export class ShipPeriod {
   @Prop({
     type: String,
@@ -38,4 +45,4 @@ export class ShipPeriod {
   runningNumber: number
 }
 
-export const ShipPeriodSchema = SchemaFactory.createForClass(ShipPeriod)
+export const shipPeriodSchema = SchemaFactory.createForClass(ShipPeriod)

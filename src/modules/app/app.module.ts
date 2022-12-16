@@ -8,6 +8,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { mongooseModuleAsyncOptions } from '../../mongoose.providers'
 import { OneTimePasswordModule } from '../one-time-password/one-time-password.module'
 import { AuthModule } from '../authentication/auth.module'
+import { ImportRateModule } from '../importRate/importRate.module'
+import { ShipPeriodModule } from '../ship-period/ship-period.module'
 import { SequenceModule } from '../sequences/sequence.module'
 import { UsersModule } from '../users/users.module'
 @Module({
@@ -20,8 +22,10 @@ import { UsersModule } from '../users/users.module'
     CurrenciesModule,
     DeliveryProvidersModule,
     GoodsModule,
-    //OneTimePasswordModule,
+    OneTimePasswordModule,
     AuthModule,
+    ImportRateModule,
+    ShipPeriodModule,
     SequenceModule,
     UsersModule,
   ],

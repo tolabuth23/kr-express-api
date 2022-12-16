@@ -2,9 +2,24 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModuleAsyncOptions } from '@nestjs/mongoose'
 import { DB_CONNECTION_NAME } from './constants'
 import {
-  deliveryProviders,
+  DeliveryProviders,
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema'
+import { Goods, goodsSchema } from './modules/goods/goods.schema'
+import { User, UserSchema } from './modules/users/users.schema'
+import {
+  Currencies,
+  currenciesSchema,
+} from './modules/currencies/currencies.schema'
+import {
+  ImportRate,
+  importRateSchema,
+} from './modules/importRate/schemas/importRate.schema'
+import {
+  ShipPeriod,
+  shipPeriodSchema,
+} from './modules/ship-period/ship-period.schema'
+import { Sequence, sequenceSchema } from './modules/sequences/sequence.schema'
 import { goods, goodsSchema } from './modules/goods/goods.schema'
 
 import { User, UserSchema } from './modules/users/users.schema'
@@ -13,12 +28,18 @@ import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
 
 export const models = [
   {
-    name: deliveryProviders.name,
+    name: DeliveryProviders.name,
     schema: deliveryProvidersSchema,
   },
   {
     name: goods.name,
     schema: goodsSchema,
+    name: Goods.name,
+    schema: goodsSchema,
+  },
+  {
+    name: Currencies.name,
+    schema: currenciesSchema,
   },
   {
     name: User.name,
@@ -27,6 +48,19 @@ export const models = [
   {
     name: Sequence.name,
     schema: SequenceSchema,
+  },
+]
+  {
+    name: ImportRate.name,
+    schema: importRateSchema,
+  },
+  {
+    name: ShipPeriod.name,
+    schema: shipPeriodSchema,
+  },
+  {
+    name: Sequence.name,
+    schema: sequenceSchema,
   },
 ]
 

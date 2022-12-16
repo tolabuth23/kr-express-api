@@ -15,7 +15,7 @@ export default class QRCode implements IQRCode {
   }
 
   async getQR() {
-    this.qr = qrCode.toDataURL(JSON.stringify(this.data))
+    this.qr = await qrCode.toDataURL(JSON.stringify(this.data))
     return this.qr
   }
 }
