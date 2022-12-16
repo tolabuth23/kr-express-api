@@ -7,12 +7,12 @@ async function bootstrap() {
   if (process.env.ENABLE_SWAGGER_API_DOCUMENT === '1') {
     setupSwagger(app)
   }
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      whitelist: true,
-    }),
-  )
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     transform: true,
+  //     whitelist: true,
+  //   }),
+  // )
   await app.listen(3000)
 }
 bootstrap()

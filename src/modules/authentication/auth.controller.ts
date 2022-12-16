@@ -20,7 +20,6 @@ import { CreateUserDto } from '../users/dto/create-user.dto'
 import { User } from '../users/users.schema'
 import * as bcrypt from 'bcrypt'
 import { ConfigService } from '@nestjs/config'
-import { LocalAuthGuard } from './guards/local-auth.guard'
 
 @ApiTags('Authentication')
 @Controller()
@@ -39,7 +38,6 @@ export class AuthController {
   })
   @Post('auth/login')
   async login(@Body() body: LoginDto) {
-    console.log('Authentication')
     return this.authService.login(body)
   }
 

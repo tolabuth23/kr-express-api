@@ -177,7 +177,7 @@ export class User {
   token: string
 
   @Prop({
-    type: SchemaTypes.ObjectId,
+    type: Types.ObjectId,
     ref: importRateValue.name,
     index: true,
     default: null,
