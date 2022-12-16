@@ -1,25 +1,22 @@
-import {
-  IsNotEmpty,
-  MinLength,
-  MaxLength,
-  IsEmail,
-  IsString,
-} from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
-import { Address, Provider, Social } from '../users.schema'
+import { IsArray, IsEmail, IsNotEmpty, IsString } from 'class-validator'
+import { Address, Provider } from '../users.schema'
+import { USER, USER_LEVEL } from '../../../constants'
 import { Types } from 'mongoose'
 
-export class CreateUserDto {
+export class UpdateUserDto {
+  @ApiProperty({
+    example: 'KR-00000003',
+  })
+  objectId: string
   // fullName
   @ApiProperty({
-    example: 'tola@gmail.com',
+    example: '0930343223',
   })
   @IsNotEmpty()
   @IsString()
-  @IsEmail()
-  email: string
+  phoneNumber: string
 
-  // Email
   @ApiProperty({
     example: 'tolabuth',
   })
@@ -27,7 +24,13 @@ export class CreateUserDto {
   @IsString()
   displayName: string
 
-  // Password
+  @ApiProperty({
+    example: 'tolabuth@gmail.com',
+  })
+  @IsNotEmpty()
+  @IsEmail()
+  email: string
+
   @ApiProperty({
     example: [
       {
@@ -43,46 +46,18 @@ export class CreateUserDto {
       },
     ],
   })
-  @IsNotEmpty()
+  @IsArray()
   addresses: Address
+  @ApiProperty({
+    example: USER,
+  })
+  level: string
 
-  @ApiProperty({
-    example: '123456789',
-  })
-  @IsNotEmpty()
-  @IsString()
-  objectId: string
-  @ApiProperty({
-    example: '0931516482',
-  })
-  @IsNotEmpty()
-  @IsString()
-  phoneNumber: string
-
-  @ApiProperty({
-    example: '1111',
-  })
-  @IsNotEmpty()
-  password: string
-
-  @ApiProperty({
-    example: Date.now(),
-  })
-  @IsNotEmpty()
-  @IsString()
-  latestLogin: Date
   @ApiProperty({})
   primaryGoodsType?: Types.ObjectId
-
   @ApiProperty({
     example: { line: { id: 'facebook' } },
   })
   @IsNotEmpty()
   provider: Provider
-
-  @ApiProperty({
-    example: false,
-  })
-  @IsNotEmpty()
-  changedPassword: boolean
 }

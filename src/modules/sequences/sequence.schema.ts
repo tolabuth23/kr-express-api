@@ -2,6 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import {Document} from "mongoose";
 import {ImportRate} from "../importRate/schemas/importRate.schema";
 
+@Schema({
+  timestamps: true,
+})
 export type sequenceDocument = Sequence & Document
 @Schema({
   collection: 'sequences',
@@ -23,4 +26,4 @@ export class Sequence {
   value: number
 }
 
-export const sequenceSchema = SchemaFactory.createForClass(Sequence)
+export const SequenceSchema = SchemaFactory.createForClass(Sequence)

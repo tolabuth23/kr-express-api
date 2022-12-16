@@ -20,12 +20,20 @@ import {
   shipPeriodSchema,
 } from './modules/ship-period/ship-period.schema'
 import { Sequence, sequenceSchema } from './modules/sequences/sequence.schema'
+import { goods, goodsSchema } from './modules/goods/goods.schema'
+
+import { User, UserSchema } from './modules/users/users.schema'
+import {} from './modules/delivery-providers/deliveryProviders.schema'
+import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
+
 export const models = [
   {
     name: DeliveryProviders.name,
     schema: deliveryProvidersSchema,
   },
   {
+    name: goods.name,
+    schema: goodsSchema,
     name: Goods.name,
     schema: goodsSchema,
   },
@@ -37,6 +45,11 @@ export const models = [
     name: User.name,
     schema: UserSchema,
   },
+  {
+    name: Sequence.name,
+    schema: SequenceSchema,
+  },
+]
   {
     name: ImportRate.name,
     schema: importRateSchema,

@@ -10,6 +10,8 @@ import { OneTimePasswordModule } from '../one-time-password/one-time-password.mo
 import { AuthModule } from '../authentication/auth.module'
 import { ImportRateModule } from '../importRate/importRate.module'
 import { ShipPeriodModule } from '../ship-period/ship-period.module'
+import { SequenceModule } from '../sequences/sequence.module'
+import { UsersModule } from '../users/users.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +26,8 @@ import { ShipPeriodModule } from '../ship-period/ship-period.module'
     AuthModule,
     ImportRateModule,
     ShipPeriodModule,
+    SequenceModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],
