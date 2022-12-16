@@ -10,16 +10,17 @@ export class SequenceService {
     @InjectModel(Sequence.name) private sequenceModel: Model<Sequence>,
   ) {}
   async getSequence(key: string) {
-    const query = { key }
-    const seq = await this.sequenceModel.findOne(query)
+    const seq = await this.sequenceModel.findOne({ key })
     if (seq) {
       return seq
     }
     return this.getNextSequence(key)
   }
   async getNextSequence(key: string) {
+    console.log(key)
     const query = { key }
     const update = { $inc: { value: 1 } }
-    return this.sequenceModel.findOneAndUpdate(query, update).lean()
+    const option = { new: true }
+    return this.sequenceModel.findOneAndUpdate(query, update, option).lean()
   }
 }

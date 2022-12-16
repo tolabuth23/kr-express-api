@@ -6,13 +6,11 @@ import {
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema'
 import { goods, goodsSchema } from './modules/goods/goods.schema'
-import {
-  OneTimePassword,
-  OneTimePasswordSchema,
-} from './modules/one-time-password/one-time-password.schema'
-import { User, UserSchema } from './modules/users/users.schema';
-import {} from './modules/delivery-providers/deliveryProviders.schema';
-import {currencies, currenciesSchema} from "./modules/currencies/currencies.schema";
+
+import { User, UserSchema } from './modules/users/users.schema'
+import {} from './modules/delivery-providers/deliveryProviders.schema'
+import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
+
 export const models = [
   {
     name: deliveryProviders.name,
@@ -20,19 +18,17 @@ export const models = [
   },
   {
     name: goods.name,
-    schema: goodsSchema
-  },
-  {
-    name:currencies.name,
-    schema: currenciesSchema
+    schema: goodsSchema,
   },
   {
     name: User.name,
     schema: UserSchema,
   },
-];
-
-
+  {
+    name: Sequence.name,
+    schema: SequenceSchema,
+  },
+]
 
 export const mongooseModuleAsyncOptions: MongooseModuleAsyncOptions = {
   imports: [ConfigModule],

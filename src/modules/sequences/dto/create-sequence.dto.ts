@@ -2,11 +2,9 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateSequenceDto {
   @ApiProperty({
-    example: '403',
+    example: '123456789',
   })
   key: string
-  @ApiProperty({
-    example: 30,
-  })
+  @ApiProperty({})
   value: number
 }
