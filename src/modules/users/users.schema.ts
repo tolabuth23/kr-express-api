@@ -1,21 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, SchemaType, SchemaTypes, Types } from 'mongoose'
-import * as shortid from 'shortid'
-import {
-  ACTIVE,
-  USER,
-  USER_LEVEL,
-  USER_ROLES,
-  USER_STATUS,
-} from '../../constants'
-import mongoose from 'mongoose'
-import { importRateValue } from '../importRate/importRateValue.schema'
-import { ERole } from './enum/enum-role'
-import { UserStatus } from './enum/enum-status'
+import shortid from 'shortid'
+import { ImportRate } from '../importRate/schemas/importRate.schema'
+import { UserRolesEnum } from '../enums/userRoles.enum'
+import { UserLevelEnum } from '../enums/userLevel.enum'
+import { UserStatusEnum } from '../enums/userStatus.enum'
 
 export type UserDocument = User & Document
-
 @Schema({
   _id: false,
 })
@@ -102,7 +94,7 @@ export const ProviderSchema = SchemaFactory.createForClass(Provider)
 export class User {
   @Prop({
     type: String,
-    //unique: true,
+    unique: true,
   })
   email: string
 
@@ -123,7 +115,7 @@ export class User {
     required: true,
     unique: true,
     index: true,
-    default: shortid.generated,
+    default: shortid.generate,
   })
   objectId: string
 
@@ -131,7 +123,6 @@ export class User {
     type: String,
     min: 9,
     required: true,
-    unique: true,
     index: true,
   })
   phoneNumber: string
@@ -151,22 +142,22 @@ export class User {
 
   @Prop({
     type: String,
-    enum: UserStatus,
-    default: UserStatus.ACTIVE,
+    enum: UserStatusEnum,
+    default: UserStatusEnum.ACTIVE,
   })
   status: string
 
   @Prop({
     type: [String],
-    enum: ERole,
-    default: [ERole.User],
+    enum: UserRolesEnum,
+    default: [UserRolesEnum.USER],
   })
   roles: string[]
 
   @Prop({
     type: String,
-    enum: USER_LEVEL,
-    default: USER,
+    enum: UserLevelEnum,
+    default: UserLevelEnum.USER,
   })
   level: string
 
@@ -178,7 +169,7 @@ export class User {
 
   @Prop({
     type: Types.ObjectId,
-    ref: importRateValue.name,
+    ref: ImportRate.name,
     index: true,
     default: null,
   })

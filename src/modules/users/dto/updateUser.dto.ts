@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsArray, IsEmail, IsNotEmpty, IsString } from 'class-validator'
 import { Address, Provider } from '../users.schema'
-import { USER, USER_LEVEL } from '../../../constants'
 import { Types } from 'mongoose'
+import { UserLevelEnum } from '../../enums/userLevel.enum'
 
 export class UpdateUserDto {
   @ApiProperty({
@@ -49,7 +49,7 @@ export class UpdateUserDto {
   @IsArray()
   addresses: Address
   @ApiProperty({
-    example: USER,
+    example: UserLevelEnum.USER,
   })
   level: string
 

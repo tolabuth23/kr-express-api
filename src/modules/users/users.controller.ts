@@ -8,26 +8,28 @@ import {
   Post,
   Put,
 } from '@nestjs/common'
+import bcrypt from 'bcrypt'
+import { ApiTags } from '@nestjs/swagger'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
-
-import * as bcrypt from 'bcrypt'
-import { ApiTags } from '@nestjs/swagger'
 import { UpdateUserDto } from './dto/updateUser.dto'
-import { User } from './users.schema'
+import { User, UserDocument } from './users.schema'
+import { RegisterValidationPipe } from '../authentication/pipes/register-validation.pipe'
 
 @ApiTags('Users')
 @Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   private logger = new Logger(UsersController.name)
+
   @Post('users')
-  async createUser(@Body() createUserDto: CreateUserDto) {
+  async createUser(
+    @Body(RegisterValidationPipe) createUserDto: CreateUserDto,
+  ): Promise<User> {
     try {
       const { password } = createUserDto
       createUserDto.objectId = await this.usersService.getUserObjectId()
       createUserDto.password = await bcrypt.hash(password, 10)
-      console.log('Create User Dto: ', createUserDto)
       return await this.usersService.createUser(createUserDto)
     } catch (error) {
       this.logger.error(error?.message ?? JSON.stringify(error))
@@ -56,5 +58,15 @@ export class UsersController {
   @Get('/users')
   async getListUsers(): Promise<User> {
     return this.usersService.getListUsers()
+  }
+
+  @Get('/users/:objectId')
+  async getOneUser(@Param('objectId') objectId: string): Promise<UserDocument> {
+    return this.usersService.getOneUser(objectId)
+  }
+
+  @Put('/users/:objectId/reset-password')
+  async resetPasswordUser(@Param('objectId') objectId: string): Promise<any> {
+    return await this.usersService.resetPasswordUser(objectId)
   }
 }

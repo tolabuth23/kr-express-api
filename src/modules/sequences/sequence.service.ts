@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { Sequence } from './sequence.schema'
+import { Sequence, sequenceDocument } from './sequence.schema'
 import { Model } from 'mongoose'
-import { CreateSequenceDto } from './dto/create-sequence.dto'
 
 @Injectable()
 export class SequenceService {
   constructor(
-    @InjectModel(Sequence.name) private sequenceModel: Model<Sequence>,
+    @InjectModel(Sequence.name) private sequenceModel: Model<sequenceDocument>,
   ) {}
   async getSequence(key: string) {
     const seq = await this.sequenceModel.findOne({ key })

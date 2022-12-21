@@ -1,20 +1,21 @@
 import { CacheModule, Module } from '@nestjs/common'
 import { AuthController } from './auth.controller'
+import { PassportModule } from '@nestjs/passport'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { AuthService } from './auth.service'
 import { UsersModule } from '../users/users.module'
-import { JwtModule, JwtService } from '@nestjs/jwt'
-import { PassportModule } from '@nestjs/passport'
-import { JwtStrategy } from './strategies/jwt.strategy'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { JwtModule } from '@nestjs/jwt'
 import { LocalStrategy } from './strategies/local.strategy'
-import { jwtConstants } from './constains'
-
+import { JwtStrategy } from './strategies/jwt-strategy'
+import { JwtEnum } from '../enums/jwt-enum'
+import { OneTimePasswordModule } from '../one-time-password/one-time-password.module'
 @Module({
   imports: [
     UsersModule,
+    OneTimePasswordModule,
     PassportModule,
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secret: JwtEnum.SECRET,
       signOptions: { expiresIn: '60d' },
     }),
     CacheModule.registerAsync({

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common'
 import { SequenceService } from './sequence.service'
 import { MongooseModule } from '@nestjs/mongoose'
-import { models } from '../../mongoose.providers'
 import { DB_CONNECTION_NAME } from '../../constants'
-import { UsersModule } from '../users/users.module'
+import { models } from '../../mongoose.providers'
+import { SequenceController } from './sequence.controller'
 
 @Module({
   imports: [MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
+  controllers: [SequenceController],
   providers: [SequenceService],
   exports: [SequenceService],
 })
