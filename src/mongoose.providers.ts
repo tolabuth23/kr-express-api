@@ -1,12 +1,14 @@
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModuleAsyncOptions } from '@nestjs/mongoose'
 import { DB_CONNECTION_NAME } from './constants'
+
+import { User, UserSchema } from './modules/users/users.schema'
+import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
 import {
   DeliveryProviders,
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema'
 import { Goods, goodsSchema } from './modules/goods/goods.schema'
-import { User, UserSchema } from './modules/users/users.schema'
 import {
   Currencies,
   currenciesSchema,
@@ -19,12 +21,10 @@ import {
   ShipPeriod,
   shipPeriodSchema,
 } from './modules/ship-period/ship-period.schema'
-import { Sequence, sequenceSchema } from './modules/sequences/sequence.schema'
-import { goods, goodsSchema } from './modules/goods/goods.schema'
-
-import { User, UserSchema } from './modules/users/users.schema'
-import {} from './modules/delivery-providers/deliveryProviders.schema'
-import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
+import {
+  OneTimePassword,
+  OneTimePasswordSchema,
+} from './modules/one-time-password/one-time-password.schema'
 
 export const models = [
   {
@@ -32,8 +32,6 @@ export const models = [
     schema: deliveryProvidersSchema,
   },
   {
-    name: goods.name,
-    schema: goodsSchema,
     name: Goods.name,
     schema: goodsSchema,
   },
@@ -49,7 +47,7 @@ export const models = [
     name: Sequence.name,
     schema: SequenceSchema,
   },
-]
+
   {
     name: ImportRate.name,
     schema: importRateSchema,
@@ -59,8 +57,8 @@ export const models = [
     schema: shipPeriodSchema,
   },
   {
-    name: Sequence.name,
-    schema: sequenceSchema,
+    name: OneTimePassword.name,
+    schema: OneTimePasswordSchema,
   },
 ]
 

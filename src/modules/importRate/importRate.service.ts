@@ -29,9 +29,9 @@ export class ImportRateService implements OnModuleInit {
     return [pCount, pRecord]
   }
   async getImportRates() {
-    let s = ''
-    let page = 1
-    const perPage: number = 0
+    const s = ''
+    const page = 1
+    const perPage = 0
     const query: any = {}
     if (s !== '') {
       query['$or'] = [

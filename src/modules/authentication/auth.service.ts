@@ -1,16 +1,15 @@
 import {
   BadRequestException,
   CACHE_MANAGER,
-  ForbiddenException,
   Inject,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common'
-import { UsersService } from '../users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import { Cache } from 'cache-manager'
-import * as bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt'
 import { ConfigService } from '@nestjs/config'
+import { UsersService } from '../users/users.service'
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -25,12 +24,9 @@ export class AuthService {
     const passwordMatches = await bcrypt.compare(pass, user.password)
     if (!passwordMatches) throw new BadRequestException('Password is incorrect')
     const { password, ...result } = user
-
     return result
   }
-
   async login(userDto: any) {
-    //check if user exists
     const user = await this.userService.findByPhoneNumber(userDto.phoneNumber)
     if (!user) throw new BadRequestException('User does not exist')
     const passwordMatches = await bcrypt.compare(
@@ -43,9 +39,12 @@ export class AuthService {
       user.phoneNumber,
       user.changedPassword,
     )
+    await this.userService.updateUserToken(
+      userDto.phoneNumber,
+      tokens.accessToken,
+    )
     return tokens
   }
-
   async getTokens(userId: string, username: string, changePass: boolean) {
     console.log(userId)
     const [accessToken, refreshToken, changePassword] = await Promise.all([
@@ -77,6 +76,4 @@ export class AuthService {
       changePassword,
     }
   }
-
-  async
 }
