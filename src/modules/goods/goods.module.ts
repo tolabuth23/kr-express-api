@@ -10,6 +10,7 @@ import {UsersModule} from '../users/users.module'
     imports: [UsersModule, MongooseModule.forFeature(models, DB_CONNECTION_NAME)],
     controllers: [GoodsController],
     providers: [GoodsService]
+
 })
 export class GoodsModule {
 }

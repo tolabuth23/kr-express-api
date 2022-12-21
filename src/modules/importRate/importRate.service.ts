@@ -29,6 +29,7 @@ export class ImportRateService implements OnModuleInit {
             .sort({createdAt: 1})
 
         return [pCount, pRecord]
+
     }
 
     async getImportRates() {

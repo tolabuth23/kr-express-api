@@ -16,9 +16,11 @@ import { ValidationInDestinationPipe } from './pipes/validationInDestination.pip
 import { ValidationInDestinationGoodPipe } from './pipes/validationInDestinationGood.pipe'
 import { ValidationGoodsByObjectId } from './pipes/validationRegisterGoods.pipe'
 
+
 @Controller('goods')
 @ApiTags('Goods')
 export class GoodsController {
+
   constructor(private goodsService: GoodsService) {
   }
 
@@ -28,7 +30,7 @@ export class GoodsController {
   }
 
   @ApiBody({
-    type: CreateGoodsDTO
+    type: CreateGoodsDTO,
   })
   @Post()
   async createGoods(
@@ -57,7 +59,6 @@ export class GoodsController {
   @ApiBody({
     type: RegisterGoodsDTO
   })
-
   @Put('register/:objectId')
   goodsRegister(@Param('objectId', ValidationGoodsByObjectId) goods: Goods,
                 @Body() registerGoodsDTO: RegisterGoodsDTO
@@ -79,6 +80,7 @@ export class GoodsController {
   ) {
     try {
       await this.goodsService.inDestinationGoods(goods, inDestinationGoods)
+
     } catch (e) {
       throw new BadRequestException({
         message: e.message ?? e
@@ -89,7 +91,7 @@ export class GoodsController {
 
   @ApiParam({
     name: 'ObjectId',
-    type: String
+    type: String,
   })
   @ApiBody({
     type: DeliveredGoodsDTO

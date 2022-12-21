@@ -1,4 +1,4 @@
-export enum UserLevel {
+export enum UserLevelEnum {
   USER = 'user',
   DEALER = 'dealer',
 }

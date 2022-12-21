@@ -1,10 +1,15 @@
 import { DB_CONNECTION_NAME } from './constants'
-import { Currency, currencySchema } from './modules/currency/currency.schema'
+import { User, UserSchema } from './modules/users/users.schema'
+import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
 import {
   DeliveryProviders,
   deliveryProvidersSchema,
 } from './modules/delivery-providers/deliveryProviders.schema'
 import { Goods, goodsSchema } from './modules/goods/goods.schema'
+import {
+  Currencies,
+  currenciesSchema,
+} from './modules/currencies/currencies.schema'
 import {
   ImportRate,
   importRateSchema,
@@ -17,6 +22,11 @@ import {
 import { User, UserSchema } from './modules/users/users.schema'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MongooseModuleAsyncOptions } from '@nestjs/mongoose'
+
+import {
+  OneTimePassword,
+  OneTimePasswordSchema,
+} from './modules/one-time-password/one-time-password.schema'
 
 export const models = [
   {
@@ -47,6 +57,12 @@ export const models = [
     name: ShipPeriod.name,
     schema: shipPeriodSchema,
   },
+
+  {
+    name: OneTimePassword.name,
+    schema: OneTimePasswordSchema,
+  },
+
 ]
 
 export const mongooseModuleAsyncOptions: MongooseModuleAsyncOptions = {

@@ -1,3 +1,4 @@
+
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Request, Response } from 'express'
@@ -44,6 +45,7 @@ export class GoodsService {
       )
       throw new InternalServerErrorException({
         message: error.message ?? error
+   
       })
     }
     if (!goodsUserOwner) {
@@ -57,6 +59,7 @@ export class GoodsService {
       const createData = {
         ...GoodsDTO,
         user: goodsUserOwner,
+
         objectId: shortid.generate()
       }
       const qrCodeInstance = new QRCode({ data: createData })
@@ -66,6 +69,7 @@ export class GoodsService {
         resolve({
           ...createData,
           qr
+
         })
       })
     })

@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { OtpEnum } from '../enums/otp.enum'
 import { Document } from 'mongoose'
 
 export type OneTimePasswordDocument = OneTimePassword & Document
@@ -36,7 +35,6 @@ export class OneTimePassword {
 
   @Prop({
     type: String,
-    enum: [OtpEnum.SIGN_UP, OtpEnum.FORGOT_PASSWORD],
     required: true,
   })
   type: string

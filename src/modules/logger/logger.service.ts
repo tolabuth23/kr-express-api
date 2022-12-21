@@ -2,7 +2,7 @@ import { ConsoleLogger, Injectable } from '@nestjs/common'
 import * as AWS from 'aws-sdk'
 import * as winston from 'winston'
 import WinstonCloudwatch from 'winston-cloudwatch'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 const cloudWatchFormatter = (info) => {
   return `${dayjs(info.timestamp).format('YYYY/MM/DD - hh:mm:ss.SSS A')} [${
