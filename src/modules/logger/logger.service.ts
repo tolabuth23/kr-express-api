@@ -1,6 +1,6 @@
 import { ConsoleLogger, Injectable } from '@nestjs/common'
-import AWS from 'aws-sdk'
-import winston from 'winston'
+import * as AWS from 'aws-sdk'
+import * as winston from 'winston'
 import WinstonCloudwatch from 'winston-cloudwatch'
 import dayjs from 'dayjs'
 

@@ -22,4 +22,8 @@ export default class CreateOptDto {
     example: 'sign_up',
   })
   type: string
+  @ApiProperty({
+    example: Date.now(),
+  })
+  expiredAt: Date
 }
