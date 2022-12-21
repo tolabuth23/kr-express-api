@@ -1,6 +1,6 @@
-import { ConfigModule, ConfigService } from '@nestjs/config'
 import { CacheModuleAsyncOptions } from '@nestjs/common/cache/interfaces/cache-module.interface'
-import * as redisStore from 'cache-manager-redis-store'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import redisStore from 'cache-manager-redis-store'
 
 const RegisterCacheOptions: CacheModuleAsyncOptions = {
   imports: [ConfigModule],

@@ -1,23 +1,41 @@
-import {ShipPeriod} from "../../ship-period/ship-period.schema";
-import {User} from "../../users/users.schema";
-import {DeliveryAddressDTO} from "./deliveryAddress.dto";
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger'
+import { IsDefined, IsNumber, IsObject, IsPositive, IsString, Min } from 'class-validator'
+import { DeliveryAddressDTO } from './deliveryAddress.dto'
 
 export class InDestinationGoodsDTO {
-    @ApiProperty({
+  @IsDefined()
+  @ApiProperty({})
+  trackingNumber: string
 
-    })
-    trackingNumber: number
-    @ApiProperty({
+  @IsDefined()
+  @ApiProperty({})
+  userId: string
 
-    })
-    user: User
-    @ApiProperty({
+  @ApiProperty({})
+  @IsDefined()
+  @IsNumber()
+  @IsPositive()
+  weight: number
 
-    })
-    cod: number
-    @ApiProperty({
+  @ApiProperty({})
+  @IsString()
+  @IsDefined()
+  category: string
 
-    })
-    deliveryAddress: DeliveryAddressDTO
+  @ApiProperty({})
+  @IsString()
+  @IsDefined()
+  currencyUnit: string
+
+  @ApiProperty({})
+  @IsNumber()
+  cod: number
+
+  @ApiProperty({})
+  @Min(1)
+  rate: number
+
+  @ApiProperty({})
+  @IsObject()
+  deliveryAddress: DeliveryAddressDTO
 }
