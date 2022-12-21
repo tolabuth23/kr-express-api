@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common'
-import { CurrenciesModule } from '../currencies/currencies.module'
 import { DeliveryProvidersModule } from '../delivery-providers/deliveryProviders.module'
 import { GoodsModule } from '../goods/goods.module'
 import { ConfigModule } from '@nestjs/config'
@@ -12,6 +11,7 @@ import { ImportRateModule } from '../importRate/importRate.module'
 import { ShipPeriodModule } from '../ship-period/ship-period.module'
 import { SequenceModule } from '../sequences/sequence.module'
 import { UsersModule } from '../users/users.module'
+import {CurrencyModule} from "../currency/currency.module";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,7 +19,7 @@ import { UsersModule } from '../users/users.module'
       isGlobal: true,
     }),
     MongooseModule.forRootAsync(mongooseModuleAsyncOptions),
-    CurrenciesModule,
+    CurrencyModule,
     DeliveryProvidersModule,
     GoodsModule,
     OneTimePasswordModule,
