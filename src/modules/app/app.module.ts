@@ -11,6 +11,7 @@ import { ImportRateModule } from '../importRate/importRate.module'
 import { ShipPeriodModule } from '../ship-period/ship-period.module'
 import { SequenceModule } from '../sequences/sequence.module'
 import { UsersModule } from '../users/users.module'
+import {CurrencyModule} from "../currency/currency.module";
 import { PublicModule } from '../public/public.module'
 import { PublicAuthenticationModule } from '../public-authentication/public-authentication.module'
 import { RequestModule } from '../request/request.module'
@@ -22,7 +23,7 @@ import { RequestModule } from '../request/request.module'
       isGlobal: true,
     }),
     MongooseModule.forRootAsync(mongooseModuleAsyncOptions),
-    CurrenciesModule,
+    CurrencyModule,
     DeliveryProvidersModule,
     GoodsModule,
     AuthModule,

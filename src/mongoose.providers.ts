@@ -1,7 +1,4 @@
-import { ConfigModule, ConfigService } from '@nestjs/config'
-import { MongooseModuleAsyncOptions } from '@nestjs/mongoose'
 import { DB_CONNECTION_NAME } from './constants'
-
 import { User, UserSchema } from './modules/users/users.schema'
 import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
 import {
@@ -17,10 +14,15 @@ import {
   ImportRate,
   importRateSchema,
 } from './modules/importRate/schemas/importRate.schema'
+import { Sequence, SequenceSchema } from './modules/sequences/sequence.schema'
 import {
   ShipPeriod,
   shipPeriodSchema,
 } from './modules/ship-period/ship-period.schema'
+import { User, UserSchema } from './modules/users/users.schema'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { MongooseModuleAsyncOptions } from '@nestjs/mongoose'
+
 import {
   OneTimePassword,
   OneTimePasswordSchema,
@@ -36,8 +38,8 @@ export const models = [
     schema: goodsSchema,
   },
   {
-    name: Currencies.name,
-    schema: currenciesSchema,
+    name: Currency.name,
+    schema: currencySchema,
   },
   {
     name: User.name,
@@ -47,7 +49,6 @@ export const models = [
     name: Sequence.name,
     schema: SequenceSchema,
   },
-
   {
     name: ImportRate.name,
     schema: importRateSchema,
@@ -56,10 +57,12 @@ export const models = [
     name: ShipPeriod.name,
     schema: shipPeriodSchema,
   },
+
   {
     name: OneTimePassword.name,
     schema: OneTimePasswordSchema,
   },
+
 ]
 
 export const mongooseModuleAsyncOptions: MongooseModuleAsyncOptions = {

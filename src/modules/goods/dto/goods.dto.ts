@@ -14,10 +14,10 @@ import {
 import { Prop } from '@nestjs/mongoose'
 import { ShipPeriod } from '../../ship-period/ship-period.schema'
 import { deliveryStatus } from '../../enums/deliveryStatus.enum'
-import { Currencies } from '../../currencies/currencies.schema'
-import { ImportRateValue } from '../../importRate/schemas/importRateValue.schema'
 import { country } from '../../enums/country.enum'
 import { ImportRate } from '../../importRate/schemas/importRate.schema'
+import {DeliveryAddressDTO} from "./deliveryAddress.dto";
+import {Currency} from "../../currency/currency.schema";
 
 export class GoodsDTO {
   @ApiProperty({})
@@ -66,7 +66,7 @@ export class GoodsDTO {
   @ApiProperty({})
   @IsString()
   @IsOptional()
-  @Prop({ type: Types.ObjectId, ref: Currencies.name })
+  @Prop({ type: Types.ObjectId, ref: Currency.name })
   currency?: object
   @ApiProperty({})
   @IsOptional()
@@ -107,7 +107,7 @@ export class GoodsDTO {
   @IsObject()
   @IsOptional()
   @ApiProperty({})
-  deliveryAddress?: Address
+  deliveryAddress?: DeliveryAddressDTO
   @IsObject()
   @IsOptional()
   @ApiProperty({})
